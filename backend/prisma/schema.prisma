@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  SELLER
+  CUSTOMER
+}
+
+// Moderation state of a product. Only APPROVED products are visible in the catalog.
+enum ProductStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// Fulfilment state of an order. Moves forward one step at a time (see utils/orderStatus.js).
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+}
+
+enum DeliveryMethod {
+  PICKUP
+  DELIVERY
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(CUSTOMER)
+  isActive     Boolean  @default(true)
+  // Bump to invalidate every JWT already issued to this user
+  // (password change, role change, deactivation).
+  tokenVersion Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  cart             Cart?
+  products         Product[] @relation("SellerProducts")
+  reviewedProducts Product[] @relation("ProductReviewer")
+  orders           Order[]   @relation("CustomerOrders")
+  sellerOrders     Order[]   @relation("SellerOrders")
+
+  @@index([role])
+  @@map("users")
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  sellerId    String
+  name        String
+  slug        String   @unique
+  category    String
+  description String   @default("")
+  imageUrl    String?
+  // Money is stored as integer Rupiah. Never floats.
+  price       Int
+  discountPct Int      @default(0)
+  stock       Int      @default(0)
+  // Seller-controlled visibility (hide a product without deleting it).
+  isActive    Boolean  @default(true)
+  // Admin-controlled moderation.
+  status          ProductStatus @default(PENDING)
+  rejectionReason String?
+  reviewedById    String?
+  reviewedAt      DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  seller     User        @relation("SellerProducts", fields: [sellerId], references: [id], onDelete: Restrict)
+  reviewedBy User?       @relation("ProductReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  @@index([sellerId])
+  @@index([category])
+  @@index([status, isActive])
+  @@map("products")
+}
+
+// One cart per customer, created lazily on first use.
+model Cart {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  cartId    String
+  productId String
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, productId])
+  @@index([productId])
+  @@map("cart_items")
+}
+
+// Checkout creates ONE order per seller, so every order has exactly one owner
+// who may move it through the fulfilment states.
+model Order {
+  id             String         @id @default(uuid())
+  code           String         @unique // human readable, e.g. GK-7H3KQ9XA
+  customerId     String
+  sellerId       String
+  status         OrderStatus    @default(PENDING)
+  deliveryMethod DeliveryMethod @default(PICKUP)
+  recipientName  String
+  phone          String
+  address        String?
+  deliveryDate   DateTime
+  note           String?
+  totalAmount    Int // computed server-side at checkout, never trusted from the client
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  customer User        @relation("CustomerOrders", fields: [customerId], references: [id], onDelete: Restrict)
+  seller   User        @relation("SellerOrders", fields: [sellerId], references: [id], onDelete: Restrict)
+  items    OrderItem[]
+
+  @@index([customerId])
+  @@index([sellerId, status])
+  @@index([status])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String @id @default(uuid())
+  orderId     String
+  productId   String
+  productName String // snapshot at purchase time
+  unitPrice   Int // snapshot: price after discount at purchase time
+  quantity    Int
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
