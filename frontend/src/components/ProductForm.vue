@@ -111,8 +111,8 @@ function submit() {
 </template>
 
 <style scoped>
-.pform { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; max-width: 680px; }
-.trio { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
-.preview { margin: -6px 0 16px; }
-.check { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; font-size: 0.95rem; }
+.pform { background: var(--cream); border: 1px solid var(--line); border-radius: 28px; padding: 30px; max-width: 700px; box-shadow: var(--shadow); }
+.trio { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.preview { margin: -6px 0 18px; }
+.check { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; font-size: 0.92rem; }
 </style>

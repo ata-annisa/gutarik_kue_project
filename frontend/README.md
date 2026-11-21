@@ -43,6 +43,26 @@ src/
   session.js    what happens when the session expires
 ```
 
+## Design system
+
+All colours, radii and fonts are CSS variables at the top of `src/styles.css` (`--blush`, `--peach`, `--cream`, `--slate`, `--coral`, `--font-display`, ...).
+Change them there and the whole app follows.
+
+| Role | Value |
+|---|---|
+| Page background | blush `#F7C5C2`, with cream/peach waves `#FCE3E0` and coral lines `#E1736B` |
+| Logo, headings, menu | slate `#4F5D88` |
+| Body text | `#4A4245` (`#3B3538` for strong text) |
+| Main buttons | coral `#E26D65`, white text, full pill |
+| Sign up / secondary pills | slate `#4F5D88`, white text, full pill |
+| Cards and panels | cream `#FFF8F7`, 1px border `#4F5D88` at 20%, rounded corners |
+
+Fonts are **self-hosted** in `public/fonts` (Berkshire Swash for headings, Montserrat for the logo, Poppins for everything else),
+so the app makes no request to Google Fonts. All three are SIL Open Font License; the licences are in the same folder.
+
+Decoration lives in three components that carry no data or behaviour: `DecorBackground.vue` (waves, halftone dots, sparkles, hearts behind every page),
+`HeroIllustration.vue` (the cupcakes on the home page) and `SiteFooter.vue`.
+
 ## Notes
 
 - **No token in JavaScript.** The session is an httpOnly cookie; the browser attaches it. The store keeps only the profile.

@@ -14,11 +14,13 @@ const toast = useToastStore();
 </template>
 
 <style scoped>
-.toast-host { position: fixed; right: 16px; bottom: 16px; z-index: 60; display: flex; flex-direction: column; gap: 10px; width: min(380px, calc(100vw - 32px)); pointer-events: none; }
-.toast { pointer-events: auto; display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--card); box-shadow: 0 6px 22px rgba(74, 44, 58, 0.18); font-size: 0.93rem; }
-.toast.success { background: var(--ok-bg); border-color: #b9dfc4; color: var(--ok); }
-.toast.error { background: var(--danger-bg); border-color: #f3c1bd; color: var(--danger); }
-.toast.info { background: var(--info-bg); border-color: #c4d7ee; color: var(--info); }
+.toast-host { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: flex; flex-direction: column; gap: 12px; width: min(390px, calc(100vw - 32px)); pointer-events: none; }
+.toast { pointer-events: auto; display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border-radius: 22px; border: 1px solid var(--line); background: var(--cream); box-shadow: 0 14px 34px rgba(79, 93, 136, 0.25); font: 500 0.88rem/1.5 var(--font-body); animation: gk-pop 0.25s ease; }
+.toast.success { background: #eaf7ef; border-color: rgba(30, 107, 54, 0.3); color: var(--ok); }
+.toast.error { background: #fdeaea; border-color: rgba(179, 54, 74, 0.35); color: var(--danger); }
+.toast.info { background: #eef2fb; border-color: rgba(51, 80, 138, 0.3); color: var(--info); }
 .msg { flex: 1; }
-.x { background: none; border: 0; font-size: 1.3rem; line-height: 1; color: inherit; cursor: pointer; padding: 0 2px; }
+.x { background: none; border: 0; font-size: 1.4rem; line-height: 1; color: inherit; cursor: pointer; padding: 0 2px; opacity: 0.7; }
+.x:hover { opacity: 1; }
+@keyframes gk-pop { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
 </style>

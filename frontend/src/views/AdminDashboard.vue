@@ -49,7 +49,7 @@ const revenueChart = computed(() =>
           {{ stats.products.awaitingReview }} produk menunggu review. <RouterLink to="/admin/products">Tinjau sekarang</RouterLink>.
         </p>
 
-        <div class="stat-grid">
+        <div class="stat-grid three">
           <StatCard label="Pengguna" :value="stats.users.total" :hint="`${stats.users.active} aktif, ${stats.users.inactive} nonaktif`" />
           <StatCard label="Menunggu review" :value="stats.products.awaitingReview" hint="produk baru" :tone="stats.products.awaitingReview ? 'warn' : ''" />
           <StatCard label="Total pesanan" :value="stats.orders.total" />

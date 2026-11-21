@@ -44,19 +44,22 @@ const stockText = computed(() => (soldOut.value ? "Stok habis" : props.product.s
 </template>
 
 <style scoped>
-.pcard { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-.thumb { position: relative; display: block; aspect-ratio: 4 / 3; background: var(--line); }
-.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ph { display: grid; place-items: center; width: 100%; height: 100%; font: 500 3rem var(--serif); color: var(--gold); }
-.disc { position: absolute; top: 10px; left: 10px; background: var(--danger); color: #fff; font-size: 0.78rem; font-weight: 700; padding: 2px 10px; border-radius: 99px; }
-.body { display: flex; flex-direction: column; gap: 2px; padding: 14px; flex: 1; }
-.cat { margin: 0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); font-weight: 700; }
-h3 { margin: 0; }
-h3 a { color: var(--ink); text-decoration: none; }
-h3 a:hover { text-decoration: underline; }
-.price { margin: 4px 0 0; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-.price s { font-size: 0.85rem; }
-.stock { margin: 0 0 10px; font-size: 0.82rem; color: var(--ok); flex: 1; }
+.pcard { display: flex; flex-direction: column; background: var(--cream); border: 1px solid var(--line); border-radius: 26px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease; }
+.pcard:hover { transform: translateY(-7px); box-shadow: var(--shadow-hover); border-color: rgba(79, 93, 136, 0.42); }
+.thumb { position: relative; display: block; aspect-ratio: 4 / 3; background: linear-gradient(140deg, #fce3e0, #f9d2ce); overflow: hidden; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
+.pcard:hover .thumb img { transform: scale(1.07); }
+.ph { display: grid; place-items: center; width: 100%; height: 100%; font: 400 3.8rem var(--font-display); color: var(--slate); opacity: 0.78; }
+.disc { position: absolute; top: 14px; left: 14px; background: var(--coral); color: #fff; font: 600 0.74rem var(--font-body); padding: 3px 13px; border-radius: var(--pill); box-shadow: 0 5px 12px rgba(226, 109, 101, 0.42); }
+.body { display: flex; flex-direction: column; gap: 2px; padding: 18px 20px 20px; flex: 1; }
+.cat { margin: 0; font: 500 0.66rem var(--font-body); letter-spacing: 0.22em; text-transform: uppercase; color: var(--slate); }
+h3 { margin: 3px 0 0; font: 600 1.04rem/1.3 var(--font-body); }
+h3 a { color: var(--slate); text-decoration: none; }
+h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.price { margin: 9px 0 0; display: flex; gap: 9px; align-items: baseline; flex-wrap: wrap; }
+.price strong { font: 700 1.12rem var(--font-brand); color: var(--slate); }
+.price s { font-size: 0.8rem; }
+.stock { margin: 3px 0 16px; font: 500 0.78rem var(--font-body); color: var(--ok); flex: 1; }
 .stock.low { color: var(--warn); }
 .stock.out { color: var(--danger); }
 </style>

@@ -30,10 +30,11 @@ const max = computed(() => Math.max(1, ...props.items.map((i) => i.value)));
 
 <style scoped>
 .chart { margin: 0; }
-figcaption { font: 500 1.05rem var(--serif); margin-bottom: 12px; }
-.bars { display: flex; align-items: flex-end; gap: 8px; height: 170px; }
-.col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 4px; }
-.bar { width: 100%; max-width: 44px; background: var(--gold); border-radius: 4px 4px 0 0; transition: height 0.3s; }
-.val { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
-.lbl { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+figcaption { font: 600 1.02rem var(--font-body); color: var(--slate); margin-bottom: 16px; }
+.bars { display: flex; align-items: flex-end; gap: 10px; height: 180px; padding-top: 6px; border-bottom: 1.5px solid rgba(79, 93, 136, 0.25); }
+.col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 5px; }
+.bar { width: 100%; max-width: 42px; background: linear-gradient(180deg, var(--coral), #f0a19b); border-radius: 10px 10px 2px 2px; transition: height 0.4s ease, filter 0.2s ease; }
+.col:hover .bar { filter: brightness(1.06) saturate(1.1); }
+.val { font: 600 0.68rem var(--font-body); color: var(--slate); white-space: nowrap; }
+.lbl { font: 500 0.68rem var(--font-body); color: var(--muted); white-space: nowrap; padding-top: 6px; }
 </style>

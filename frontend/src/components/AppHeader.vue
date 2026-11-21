@@ -70,59 +70,80 @@ async function logout() {
 <template>
   <header class="top">
     <div class="bar">
-      <RouterLink to="/" class="brand"><span>Gutarik</span> <em>Kue</em></RouterLink>
+      <RouterLink to="/" class="brand" aria-label="Gutarik Kue, ke beranda"><span class="b1">Gutarik</span><span class="b2">Kue</span></RouterLink>
 
       <button type="button" class="menu-btn" :aria-expanded="menuOpen" aria-controls="main-nav" @click="menuOpen = !menuOpen">
         {{ menuOpen ? "Tutup" : "Menu" }}
       </button>
 
       <nav id="main-nav" aria-label="Navigasi utama" :class="{ open: menuOpen }">
-        <RouterLink
-          v-for="l in links"
-          :key="l.to"
-          :to="l.to"
-          :class="{ active: isActive(l) }"
-          :aria-current="isActive(l) ? 'page' : undefined"
-        >
-          {{ l.label }}
-          <span v-if="l.badge" class="count" :aria-label="`${l.badge} item`">{{ l.badge }}</span>
-        </RouterLink>
+        <div class="links">
+          <RouterLink
+            v-for="l in links"
+            :key="l.to"
+            :to="l.to"
+            :class="{ active: isActive(l) }"
+            :aria-current="isActive(l) ? 'page' : undefined"
+          >
+            {{ l.label }}
+            <span v-if="l.badge" class="count" :aria-label="`${l.badge} item`">{{ l.badge }}</span>
+          </RouterLink>
+        </div>
 
-        <template v-if="auth.user">
-          <span class="who">
-            {{ auth.user.name }}
-            <span class="badge" :data-role="auth.user.role">{{ ROLE_LABEL[auth.user.role] }}</span>
-          </span>
-          <button type="button" class="link-btn" @click="logout">Keluar</button>
-        </template>
-        <template v-else>
-          <RouterLink to="/login">Masuk</RouterLink>
-          <RouterLink to="/register" class="btn small">Daftar</RouterLink>
-        </template>
+        <div class="account">
+          <template v-if="auth.user">
+            <span class="who">
+              {{ auth.user.name }}
+              <span class="badge" :data-role="auth.user.role">{{ ROLE_LABEL[auth.user.role] }}</span>
+            </span>
+            <button type="button" class="link-btn logout" @click="logout">Keluar</button>
+          </template>
+          <template v-else>
+            <RouterLink to="/login" class="plain">Masuk</RouterLink>
+            <RouterLink to="/register" class="pill">Daftar</RouterLink>
+          </template>
+        </div>
       </nav>
     </div>
   </header>
 </template>
 
 <style scoped>
-.top { background: var(--bg); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
-.bar { max-width: 1100px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.brand { font-family: var(--serif); font-size: 1.5rem; text-decoration: none; color: var(--ink); }
-.brand em { color: var(--gold); }
-nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-nav a { text-decoration: none; font-weight: 600; color: var(--ink); padding: 4px 0; border-bottom: 2px solid transparent; }
-nav a:hover { border-bottom-color: var(--line); }
-nav a.active { border-bottom-color: var(--gold); }
-nav a.btn { color: var(--accent-ink); border-bottom: 1.5px solid var(--accent); }
-.count { display: inline-block; min-width: 20px; padding: 0 6px; margin-left: 2px; border-radius: 99px; background: var(--accent); color: #fff; font-size: 0.75rem; text-align: center; }
-.who { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
-.badge { font-size: 0.75rem; padding: 2px 10px; border-radius: 99px; background: var(--line); color: var(--ink); }
-.badge[data-role="ADMIN"] { background: #4a2c3a; color: #fff; }
-.badge[data-role="SELLER"] { background: var(--gold); color: #2a1a10; }
-.menu-btn { display: none; background: none; border: 1.5px solid var(--line); border-radius: 99px; padding: 6px 16px; font: 600 0.9rem var(--sans); color: var(--ink); cursor: pointer; }
-@media (max-width: 820px) {
+.top { position: sticky; top: 0; z-index: 20; background: linear-gradient(rgba(247, 197, 194, 0.97), rgba(247, 197, 194, 0.9)); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.bar { max-width: 1120px; margin: 0 auto; padding: 18px 24px 16px; display: flex; align-items: center; gap: 36px; }
+
+/* logo: two stacked words, like the reference */
+.brand { display: flex; flex-direction: column; line-height: 1; text-decoration: none; color: var(--slate); font-family: var(--font-brand); text-transform: uppercase; flex: none; }
+.b1 { font-weight: 600; font-size: 0.9rem; letter-spacing: 0.2em; }
+.b2 { font-weight: 800; font-size: 1.85rem; letter-spacing: 0.08em; margin-top: 3px; }
+
+/* editorial menu bar: a thin slate line above and below */
+nav { flex: 1; min-width: 0; display: flex; align-items: center; gap: 28px; border-top: 1px solid var(--slate); border-bottom: 1px solid var(--slate); padding: 13px 4px; }
+.links { display: flex; align-items: center; gap: 34px; flex-wrap: wrap; }
+.links a { position: relative; text-decoration: none; font: 600 0.72rem var(--font-body); letter-spacing: 0.17em; text-transform: uppercase; color: var(--slate); padding: 5px 0; transition: color 0.15s ease; }
+.links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; border-radius: 2px; background: var(--coral); transform: scaleX(0); transform-origin: left; transition: transform 0.22s ease; }
+.links a:hover::after, .links a.active::after { transform: scaleX(1); }
+.count { display: inline-block; min-width: 19px; padding: 1px 6px; margin-left: 4px; border-radius: var(--pill); background: var(--coral); color: #fff; font: 600 0.68rem var(--font-body); letter-spacing: 0; text-align: center; vertical-align: 1px; }
+
+.account { margin-left: auto; display: flex; align-items: center; gap: 18px; flex: none; }
+.plain { text-decoration: none; font: 600 0.72rem var(--font-body); letter-spacing: 0.17em; text-transform: uppercase; color: var(--slate); }
+.plain:hover { color: var(--coral-dark); }
+.pill { text-decoration: none; background: var(--slate); color: #fff; border-radius: var(--pill); padding: 8px 24px; font: 600 0.72rem var(--font-body); letter-spacing: 0.17em; text-transform: uppercase; transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease; }
+.pill:hover { background: #434f78; transform: translateY(-2px); box-shadow: 0 8px 16px rgba(79, 93, 136, 0.3); }
+.who { display: inline-flex; align-items: center; gap: 10px; font: 600 0.82rem var(--font-body); color: var(--slate); }
+.badge { font: 600 0.66rem var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 12px; border-radius: var(--pill); background: #fff; color: var(--slate); }
+.badge[data-role="ADMIN"] { background: var(--slate); color: #fff; }
+.badge[data-role="SELLER"] { background: var(--coral); color: #fff; }
+.logout { font: 600 0.72rem var(--font-body); letter-spacing: 0.17em; text-transform: uppercase; text-decoration: none; color: var(--slate); }
+.logout:hover { color: var(--coral-dark); }
+
+.menu-btn { display: none; margin-left: auto; background: var(--slate); color: #fff; border: 0; border-radius: var(--pill); padding: 8px 22px; font: 600 0.72rem var(--font-body); letter-spacing: 0.17em; text-transform: uppercase; cursor: pointer; }
+@media (max-width: 920px) {
+  .bar { flex-wrap: wrap; gap: 14px; }
   .menu-btn { display: inline-block; }
-  nav { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 12px; padding: 8px 0 4px; }
+  nav { display: none; width: 100%; flex: 1 1 100%; flex-direction: column; align-items: flex-start; gap: 18px; padding: 18px 4px; }
   nav.open { display: flex; }
+  .links { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .account { margin-left: 0; flex-wrap: wrap; }
 }
 </style>

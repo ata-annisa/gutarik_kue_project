@@ -52,9 +52,10 @@ onMounted(() => {
     </div>
 
     <div class="toolbar">
-      <div class="grow">
+      <div class="grow searchbox">
         <label for="code" class="sr-only">Cari kode pesanan</label>
         <input id="code" v-model="code" type="search" placeholder="Cari kode pesanan, contoh: GK-7H3K" autocomplete="off" />
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></span>
       </div>
       <div>
         <label for="status" class="sr-only">Status</label>

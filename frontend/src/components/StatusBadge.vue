@@ -14,7 +14,7 @@ const label = computed(() => (props.kind === "product" ? PRODUCT_STATUS_LABEL : 
 </template>
 
 <style scoped>
-.status-badge { display: inline-block; padding: 2px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; background: var(--line); color: var(--ink); white-space: nowrap; }
+.status-badge { display: inline-block; padding: 3px 14px; border-radius: var(--pill); font: 600 0.72rem var(--font-body); letter-spacing: 0.03em; background: var(--peach); color: var(--text); white-space: nowrap; }
 [data-status="PENDING"] { background: var(--warn-bg); color: var(--warn); }
 [data-status="PROCESSING"] { background: var(--info-bg); color: var(--info); }
 [data-status="SHIPPED"] { background: #ece6fa; color: #4b3a8a; }

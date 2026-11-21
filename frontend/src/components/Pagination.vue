@@ -16,6 +16,6 @@ const emit = defineEmits(["change"]);
 </template>
 
 <style scoped>
-.pager { display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
-.info { font-size: 0.85rem; color: var(--muted); }
+.pager { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 30px; }
+.info { font: 500 0.78rem var(--font-body); letter-spacing: 0.04em; color: var(--slate); }
 </style>

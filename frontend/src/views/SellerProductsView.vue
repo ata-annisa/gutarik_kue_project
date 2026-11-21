@@ -82,9 +82,10 @@ async function remove(p) {
     </div>
 
     <div class="toolbar">
-      <div class="grow">
+      <div class="grow searchbox">
         <label for="q" class="sr-only">Cari produk</label>
         <input id="q" v-model="q" type="search" placeholder="Cari nama produk..." autocomplete="off" />
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></span>
       </div>
       <div>
         <label for="status" class="sr-only">Status</label>
@@ -125,9 +126,11 @@ async function remove(p) {
                   {{ p.isActive ? "Tampil" : "Disembunyikan" }}
                 </button>
               </td>
-              <td data-label="Aksi" class="actions">
-                <RouterLink :to="`/seller/products/${p.id}/edit`" class="btn ghost small">Ubah</RouterLink>
-                <button type="button" class="btn ghost danger small del" :disabled="busyId !== null" @click="remove(p)">Hapus</button>
+              <td data-label="Aksi">
+                <div class="actions">
+                  <RouterLink :to="`/seller/products/${p.id}/edit`" class="btn ghost small">Ubah</RouterLink>
+                  <button type="button" class="btn ghost danger small del" :disabled="busyId !== null" @click="remove(p)">Hapus</button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -140,9 +143,10 @@ async function remove(p) {
 </template>
 
 <style scoped>
-.pname { font-weight: 700; margin-right: 8px; }
-.cat { display: block; font-size: 0.82rem; }
+.pname { font: 600 0.95rem var(--font-body); margin-right: 10px; color: var(--slate); text-decoration: none; }
+.pname:hover { text-decoration: underline; text-underline-offset: 3px; }
+.cat { display: block; font-size: 0.8rem; margin-top: 2px; }
 .reason { display: block; }
-.low { color: var(--warn); font-weight: 700; }
+.low { color: var(--warn); font-weight: 600; }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; }
 </style>

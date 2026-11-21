@@ -64,8 +64,11 @@ function accept() {
 </template>
 
 <style scoped>
-.overlay { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 16px; background: rgba(40, 22, 30, 0.45); }
-.dialog { width: min(440px, 100%); background: var(--card); border-radius: var(--radius); padding: 22px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }
-.msg { white-space: pre-line; color: var(--muted); }
-.actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; }
+.overlay { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 16px; background: rgba(79, 93, 136, 0.38); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: gk-fade 0.18s ease; }
+.dialog { width: min(460px, 100%); background: var(--cream); border: 1px solid var(--line); border-radius: 30px; padding: 28px 28px 24px; box-shadow: 0 24px 60px rgba(40, 48, 80, 0.35); animation: gk-pop 0.22s ease; }
+.dialog h2 { font: 400 1.7rem/1.2 var(--font-display); color: var(--slate); }
+.msg { white-space: pre-line; color: var(--text-2); font-size: 0.92rem; }
+.actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+@keyframes gk-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gk-pop { from { opacity: 0; transform: translateY(12px) scale(0.97); } to { opacity: 1; transform: none; } }
 </style>

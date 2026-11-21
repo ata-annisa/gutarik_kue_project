@@ -160,10 +160,11 @@ async function submit() {
 </template>
 
 <style scoped>
-.layout { display: grid; gap: 22px; grid-template-columns: minmax(0, 1fr) 340px; align-items: start; }
-.summary { position: sticky; top: 84px; }
-.grand { font: 500 1.2rem var(--serif); }
-.code { font-family: ui-monospace, Menlo, Consolas, monospace; }
-.done { max-width: 620px; margin: 16px auto; }
+.layout { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr) 350px; align-items: start; }
+.layout > form.panel, .summary { border-radius: 28px; padding: 26px; }
+.summary { position: sticky; top: 118px; }
+.grand { font: 700 1.2rem var(--font-brand); color: var(--slate); }
+.code { font: 700 0.95rem var(--font-brand); letter-spacing: 0.06em; color: var(--slate); }
+.done { max-width: 640px; margin: 18px auto; border-radius: 30px; padding: 32px; }
 @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .summary { position: static; } }
 </style>

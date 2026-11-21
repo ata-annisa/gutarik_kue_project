@@ -118,9 +118,10 @@ async function toggleUserStatus(user) {
     </div>
 
     <div class="toolbar">
-      <div class="grow">
+      <div class="grow searchbox">
         <label for="user-search" class="sr-only">Cari nama atau email</label>
         <input id="user-search" v-model="searchQuery" type="search" placeholder="Cari nama atau email..." autocomplete="off" />
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></span>
       </div>
       <div>
         <label for="role-filter" class="sr-only">Filter role</label>
@@ -194,11 +195,13 @@ async function toggleUserStatus(user) {
 
 <style scoped>
 .email { word-break: break-all; color: var(--muted); }
-.you { margin-left: 6px; font-size: 0.72rem; padding: 1px 8px; border-radius: 99px; background: var(--line); }
-.pill { display: inline-block; padding: 2px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; }
+.you { margin-left: 8px; font: 600 0.64rem var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 10px; border-radius: var(--pill); background: var(--peach); color: var(--slate); }
+.pill { display: inline-block; padding: 3px 14px; border-radius: var(--pill); font: 600 0.74rem var(--font-body); }
 .pill.on { background: var(--ok-bg); color: var(--ok); }
 .pill.off { background: var(--danger-bg); color: var(--danger); }
-.row-btn { padding: 6px 14px; font: 600 0.85rem var(--sans); color: var(--accent); background: transparent; border: 1.5px solid var(--accent); border-radius: 99px; cursor: pointer; }
-.row-btn.danger { color: var(--danger); border-color: #e0a09c; }
-.row-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.row-btn { padding: 7px 20px; font: 600 0.78rem var(--font-body); color: var(--slate); background: transparent; border: 1.5px solid var(--slate); border-radius: var(--pill); cursor: pointer; transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease; }
+.row-btn:hover:not(:disabled) { background: var(--slate); color: #fff; transform: translateY(-1px); }
+.row-btn.danger { color: var(--danger); border-color: rgba(179, 54, 74, 0.55); }
+.row-btn.danger:hover:not(:disabled) { background: var(--danger); border-color: var(--danger); color: #fff; }
+.row-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 </style>

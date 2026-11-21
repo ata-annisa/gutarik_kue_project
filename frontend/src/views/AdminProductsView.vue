@@ -80,9 +80,10 @@ async function reject(p) {
     </div>
 
     <div class="toolbar">
-      <div class="grow">
+      <div class="grow searchbox">
         <label for="q" class="sr-only">Cari produk</label>
         <input id="q" v-model="q" type="search" placeholder="Cari nama produk..." autocomplete="off" />
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></span>
       </div>
       <div>
         <label for="status" class="sr-only">Status</label>
@@ -132,14 +133,15 @@ async function reject(p) {
 </template>
 
 <style scoped>
-.prod { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 16px; align-items: start; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; margin-bottom: 14px; }
+.prod { display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; gap: 20px; align-items: start; background: var(--cream); border: 1px solid var(--line); border-radius: 26px; padding: 18px; margin-bottom: 18px; box-shadow: var(--shadow); transition: box-shadow 0.22s ease, opacity 0.2s ease; }
+.prod:hover { box-shadow: var(--shadow-hover); }
 .prod.busy { opacity: 0.55; }
-.pic { width: 110px; height: 90px; border-radius: 6px; overflow: hidden; background: var(--line); }
+.pic { width: 120px; height: 96px; border-radius: 20px; overflow: hidden; background: linear-gradient(140deg, #fce3e0, #f9d2ce); }
 .pic img { width: 100%; height: 100%; object-fit: cover; }
-.ph { display: grid; place-items: center; width: 100%; height: 100%; font: 500 2rem var(--serif); color: var(--gold); }
-h3 { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.meta { margin: 2px 0; font-size: 0.88rem; }
-.desc { margin: 6px 0 0; font-size: 0.92rem; white-space: pre-line; }
-.actions { display: flex; flex-direction: column; gap: 8px; }
-@media (max-width: 640px) { .prod { grid-template-columns: 80px minmax(0, 1fr); } .pic { width: 80px; height: 70px; } .actions { grid-column: 1 / -1; flex-direction: row; } }
+.ph { display: grid; place-items: center; width: 100%; height: 100%; font: 400 2.2rem var(--font-display); color: var(--slate); }
+h3 { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+.meta { margin: 3px 0; font-size: 0.86rem; }
+.desc { margin: 8px 0 0; font-size: 0.9rem; white-space: pre-line; }
+.actions { display: flex; flex-direction: column; gap: 10px; }
+@media (max-width: 640px) { .prod { grid-template-columns: 84px minmax(0, 1fr); } .pic { width: 84px; height: 72px; } .actions { grid-column: 1 / -1; flex-direction: row; } }
 </style>

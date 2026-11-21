@@ -57,7 +57,7 @@ const revenueChart = computed(() =>
           {{ stats.orders.byStatus.PENDING }} pesanan baru menunggu Anda. <RouterLink to="/seller/orders">Proses sekarang</RouterLink>.
         </p>
 
-        <div class="stat-grid">
+        <div class="stat-grid three">
           <StatCard label="Pendapatan" :value="rupiah(stats.orders.revenue)" hint="dari pesanan selesai" tone="ok" />
           <StatCard label="Dalam proses" :value="rupiah(stats.orders.pipeline)" hint="pesanan belum selesai" />
           <StatCard label="Total pesanan" :value="stats.orders.total" />

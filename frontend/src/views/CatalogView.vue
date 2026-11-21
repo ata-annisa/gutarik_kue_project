@@ -53,9 +53,10 @@ onMounted(() => {
     </p>
 
     <div class="toolbar">
-      <div class="grow">
+      <div class="grow searchbox">
         <label for="q" class="sr-only">Cari produk</label>
         <input id="q" v-model="q" type="search" placeholder="Cari nama kue..." autocomplete="off" />
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg></span>
       </div>
       <div>
         <label for="category" class="sr-only">Kategori</label>

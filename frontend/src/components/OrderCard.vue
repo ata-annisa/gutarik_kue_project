@@ -70,23 +70,25 @@ const who = (u) => (props.perspective === "admin" && u.email ? `${u.name} (${u.e
 </template>
 
 <style scoped>
-.ocard { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 14px; }
+.ocard { background: var(--cream); border: 1px solid var(--line); border-radius: 26px; padding: 22px 24px; margin-bottom: 20px; box-shadow: var(--shadow); transition: box-shadow 0.22s ease, border-color 0.22s ease; }
+.ocard:hover { box-shadow: var(--shadow-hover); border-color: rgba(79, 93, 136, 0.38); }
 header { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-.title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.code { font-family: ui-monospace, Menlo, Consolas, monospace; letter-spacing: 0.04em; }
-.when { font-size: 0.82rem; }
-.steps { list-style: none; display: flex; gap: 6px; padding: 0; margin: 14px 0; }
-.steps li { flex: 1; text-align: center; font-size: 0.72rem; padding: 6px 2px; border-radius: 4px; background: var(--line); color: var(--muted); border-bottom: 3px solid transparent; }
-.steps li.done { background: var(--ok-bg); color: var(--ok); }
-.steps li.current { font-weight: 700; border-bottom-color: var(--ok); }
-.who { display: grid; gap: 4px; margin: 0 0 8px; font-size: 0.92rem; }
-.who div { display: flex; gap: 8px; }
-dt { color: var(--muted); min-width: 110px; }
+.title { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.code { font: 700 0.98rem var(--font-brand); letter-spacing: 0.07em; color: var(--slate); }
+.when { font-size: 0.8rem; }
+.steps { list-style: none; display: flex; gap: 8px; padding: 0; margin: 18px 0; }
+.steps li { flex: 1; text-align: center; font: 500 0.7rem var(--font-body); padding: 8px 4px; border-radius: var(--pill); background: var(--peach); color: var(--muted); transition: background-color 0.2s ease; }
+.steps li.done { background: var(--slate-wash); color: var(--slate); }
+.steps li.current { background: var(--slate); color: #fff; font-weight: 600; box-shadow: 0 6px 14px rgba(79, 93, 136, 0.28); }
+.who { display: grid; gap: 5px; margin: 0 0 10px; font-size: 0.9rem; }
+.who div { display: flex; gap: 10px; }
+dt { color: var(--slate); font-weight: 600; min-width: 118px; }
 dd { margin: 0; }
-.sum { margin: 6px 0; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-.toggle { margin-left: auto; font-size: 0.88rem; }
-.detail { border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 6px; }
-.line { margin: 6px 0 0; font-size: 0.9rem; }
-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 12px; flex-wrap: wrap; }
-@media (max-width: 560px) { .steps li { font-size: 0.62rem; } dt { min-width: 80px; } }
+.sum { margin: 8px 0; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.total { font: 700 1.05rem var(--font-brand); color: var(--slate); }
+.toggle { margin-left: auto; font-size: 0.85rem; }
+.detail { border-top: 1px dashed rgba(79, 93, 136, 0.3); padding-top: 12px; margin-top: 8px; }
+.line { margin: 7px 0 0; font-size: 0.88rem; }
+footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 14px; flex-wrap: wrap; }
+@media (max-width: 560px) { .steps { gap: 4px; } .steps li { font-size: 0.6rem; padding: 7px 2px; } dt { min-width: 84px; } }
 </style>

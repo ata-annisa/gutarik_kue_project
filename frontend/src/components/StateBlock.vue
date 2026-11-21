@@ -22,6 +22,7 @@ const emit = defineEmits(["retry"]);
 </template>
 
 <style scoped>
-.state-block { padding: 36px 16px; text-align: center; margin: 0; }
+.state-block { padding: 44px 16px; text-align: center; margin: 0; }
+.state-block.muted { color: var(--muted); }
 .busy { opacity: 0.6; transition: opacity 0.15s; }
 </style>
